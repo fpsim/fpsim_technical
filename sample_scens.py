@@ -22,10 +22,11 @@ if __name__ == '__main__':
     year       = 2020  #intervention year for all scenarios unless otherwise specified
     limiters   = ['>35']
     youth      = ['<18', '18-20']
-    location   = 'Senegal'
+    location   = 'senegal'
     
     
     pars = fp.pars(n_agents=n_agents, start_year=start_year, end_year=end_year, location=location)
+    pars.add_method(name='new injectables', eff=0.983)
     
  
 ## Prepare basic set of scenarios ##
@@ -60,7 +61,7 @@ s5a = fp.make_scen(
     year=year,
     probs=[
     dict(copy_from='Injectables', method=method, ages=limiters),
-    dict(disc_factor=0.5, **kw),
+    dict(discont_factor=0.5, **kw),
         ]
     )
 
@@ -99,7 +100,22 @@ scens.run(serial=debug)
 ## Integrated plot options
 scens.plot()    
 scens.plot('cpr')
-scens.plot('method')
+
+##set color dict for method mix plot    
+colors={'None'              : [0.0, 0.0, 0.0],
+        'Withdrawal'        : [0.3, 0.3, 0.3],
+        'Other traditional' : [0.5, 0.5, 0.5],
+        'Condoms'           : [0.7, 0.7, 0.7],
+        'Pill'              : [0.3, 0.8, 0.9],
+        'Injectables'       : [0.6, 0.4, 0.9],
+        'Implants'          : [0.4, 0.2, 0.9],
+        'IUDs'              : [0.0, 0.0, 0.9],
+        'BTL'               : [0.8, 0.0, 0.0],
+        'Other modern'      : [0.8, 0.5, 0.5],
+        'new injectables'   : [0.2, 0.8, 0.2],        
+        }
+scens.plot('method', colors=[color for color in colors.values()])
+
 
 #%% Create sims
 scens = fp.Scenarios(pars=pars, repeats=repeats)
@@ -113,4 +129,18 @@ scens.run(serial=debug)
 ## Integrated plot options
 scens.plot()    
 scens.plot('cpr')
-scens.plot('method')
+
+##set color dict for method mix plot    
+colors={'None'              : [0.0, 0.0, 0.0],
+        'Withdrawal'        : [0.3, 0.3, 0.3],
+        'Other traditional' : [0.5, 0.5, 0.5],
+        'Condoms'           : [0.7, 0.7, 0.7],
+        'Pill'              : [0.3, 0.8, 0.9],
+        'Injectables'       : [0.6, 0.4, 0.9],
+        'Implants'          : [0.4, 0.2, 0.9],
+        'IUDs'              : [0.0, 0.0, 0.9],
+        'BTL'               : [0.8, 0.0, 0.0],
+        'Other modern'      : [0.8, 0.5, 0.5],
+        'new injectables'   : [0.2, 0.8, 0.2],        
+        }
+scens.plot('method', colors=[color for color in colors.values()])
