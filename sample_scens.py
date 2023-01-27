@@ -56,7 +56,7 @@ method = 'new injectables'
 kw = dict(method=method)
 d_kw = dict(dest=method)
 
-#initial introduction of new method, with 1.5% probability of uptake for 35+ population
+#initial introduction of new method, same probability of uptake across ages, reduced discontinuation for 35+
 s5a = fp.make_scen(
     year=year,
     probs=[
@@ -65,7 +65,7 @@ s5a = fp.make_scen(
         ]
     )
 
-#anticipate switching from existing injectables
+#anticipate switching from existing injectables, all ages
 s5b = fp.make_scen(
     year=year,
     probs=[
@@ -73,7 +73,7 @@ s5b = fp.make_scen(
         ]
     )
 
-#Staggered introduction to youth sub-population
+#Staggered introduction to youth sub-population with 1.15% initiation probability
 
 s5c = fp.make_scen(
     year = 2023,
